@@ -37,7 +37,21 @@ const app = http.createServer((req,res)=>{
     }
 
     else if (req.url == "/api/image") {
-        
+
+        // created the path fro the given image
+        const imagePath = path.join(__dirname, "1st.png");
+        console.log(imagePath);
+        // fs module to read the image file and convert it into data
+        fs.readFile(imagePath,(err,data)=>{
+            if (err) {
+                res.writeHead(404,{"Content-Type":"text/plain"});
+                res.end("IMage npt found");
+            }
+            else{
+                res.writeHead(200,{"Content-Type":"image/png"});
+                res.end(data);
+            }
+        })
         
     }
 

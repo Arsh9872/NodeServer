@@ -55,6 +55,21 @@ const app = http.createServer((req,res)=>{
         
     }
 
+    else if (req.url == "/api/html") {
+        const htmlPath = path.join(__dirname,"contact.html");
+        fs.readFile(htmlPath,(err,data)=> {
+            if (err) {
+                req.writeHead(404, {"Content-Type":"text/plain"});
+                res.end("Content not found");
+            }
+            else{
+                res.writeHead(200,{"Content-Type":"text/html"});
+                res.end(data);
+            }
+        });
+        
+    }
+
 });
 
 
